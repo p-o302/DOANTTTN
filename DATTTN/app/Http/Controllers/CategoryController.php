@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use function Ramsey\Uuid\v1;
+
 class CategoryController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        echo (" danh mục phim");
+        return view('admincp.category.form');
     }
 
     /**
