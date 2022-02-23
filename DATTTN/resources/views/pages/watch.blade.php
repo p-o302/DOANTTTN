@@ -89,7 +89,7 @@
                                 <div class="halim-server">
                                     <ul class="halim-list-eps">
 
-                                        <a href="{{route('episode')}}">
+                                        <a href="{{route('watch')}}">
                                             <li class="halim-episode"><span
                                                     class="halim-btn halim-btn-2 active halim-info-1-1 box-shadow"
                                                     data-post-id="37976" data-server="1" data-episode="1"
@@ -97,7 +97,7 @@
                                                     data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 1 - Be Together - vietsub + Thuyết Minh"
                                                     data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 1">1</span></li>
                                         </a>
-                                        <a href="{{route('episode')}}">
+                                        <a href="{{route('watch')}}">
                                             <li class="halim-episode"><span
                                                     class="halim-btn halim-btn-2 halim-info-1-2 box-shadow"
                                                     data-post-id="37976" data-server="1" data-episode="2" data-position=""
@@ -105,7 +105,7 @@
                                                     data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 2 - Be Together - vietsub + Thuyết Minh"
                                                     data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 2">2</span></li>
                                         </a>
-                                        <a href="{{route('episode')}}">
+                                        <a href="{{route('watch')}}">
                                             <li class="halim-episode"><span
                                                     class="halim-btn halim-btn-2 halim-info-1-3 box-shadow"
                                                     data-post-id="37976" data-server="1" data-episode="3" data-position=""

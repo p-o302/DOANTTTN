@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category; 
-use function Ramsey\Uuid\v1;
+
 
 class CategoryController extends Controller
 {
@@ -40,6 +40,7 @@ class CategoryController extends Controller
         $data = $request->all();
         $category = new Category();
         $category->title = $data['title'];
+        $category->slug = $data['slug'];
         $category->description = $data['description'];
         $category->status = $data['status'];
         $category->save();
@@ -82,10 +83,11 @@ class CategoryController extends Controller
         $data = $request->all();
         $category = Category::find($id);
         $category->title = $data['title'];
+        $category->slug = $data['slug'];
         $category->description = $data['description'];
         $category->status = $data['status'];
         $category->save();
-        return redirect()->back();
+        return redirect(route('category.create'));
     }
 
     /**
