@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCategoryRequest;
 use Illuminate\Http\Request;
-use App\Models\Category; 
+use App\Models\Category;
 
 
 class CategoryController extends Controller
@@ -35,15 +36,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        $data = $request->all();
-        $category = new Category();
-        $category->title = $data['title'];
-        $category->slug = $data['slug'];
-        $category->description = $data['description'];
-        $category->status = $data['status'];
-        $category->save();
+        Category::create($request->all());
+
         return redirect()->back();
     }
 
@@ -66,9 +62,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $list = Category::all();
-        return view('admincp.category.form', compact('list','category'));
+        return view('admincp.category.form', compact('list', 'category'));
     }
 
     /**
@@ -80,13 +76,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $category = Category::find($id);
-        $category->title = $data['title'];
-        $category->slug = $data['slug'];
-        $category->description = $data['description'];
-        $category->status = $data['status'];
-        $category->save();
+        $category = Category::findOrFail($id);
+        $category->update([
+           'title' => $request->input('title'),
+           'slug' => $request->input('slug'),
+           'description' => $request->input('description'),
+           'status' => $request->input('status'),
+        ]);
+
         return redirect(route('category.create'));
     }
 
@@ -98,7 +95,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        Category::findOrFail($id)->delete();
         return redirect()->back();
     }
 }
