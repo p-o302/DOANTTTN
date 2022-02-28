@@ -83,7 +83,6 @@ class CategoryController extends Controller
            'description' => $request->input('description'),
            'status' => $request->input('status'),
         ]);
-
         return redirect(route('category.create'));
     }
 
