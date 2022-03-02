@@ -83,8 +83,8 @@
                             <tr>
                                 <th scope="row">{{ $key }}</th>
                                 <td>{{ $cate->title }}</td>
-                                <td> <img src="{{asset('uploads/movie/'.$cate->image)}}" alt="mangcui" srcset="" style="width: 150px; height: 150px;"></td>
-                                <td>{{ $cate->description }}</td>
+                                <td> <img src="{{asset('uploads/movie/'.$cate->image)}}" alt="mangcui" srcset="" style="width: 50px; height: 70px;"></td>
+                                <td style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 0;">{{ $cate->description }}</td>
                                 <td>{{ $cate->slug }}</td>
                                 <td>
                                     @if ($cate->status)
