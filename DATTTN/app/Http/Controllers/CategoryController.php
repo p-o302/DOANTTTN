@@ -16,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $list = Category::latest()->paginate(5);
+        return view('admincp.category.listCategory',compact('list'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -26,8 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $list = Category::all();
-        return view('admincp.category.form', compact('list'));
+        // $list = Category::all();
+        return view('admincp.category.form');
     }
 
     /**
@@ -39,8 +41,8 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
     {
         Category::create($request->all());
-
-        return redirect()->back();
+        return redirect(route('category.index'))->with('flash_message','Producer add successfully');
+        // return redirect()->back();
     }
 
     /**
@@ -83,7 +85,8 @@ class CategoryController extends Controller
            'description' => $request->input('description'),
            'status' => $request->input('status'),
         ]);
-        return redirect(route('category.create'));
+        return redirect(route('category.index'))->with('flash_message','Producer updated successfully');
+        // return Redirect::route('producer.index');
     }
 
     /**
@@ -95,6 +98,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::findOrFail($id)->delete();
-        return redirect()->back();
+        // return redirect(route(''))->back();
+        return redirect(route('category.index'))->with('flash_message','Producer deleted successfully');
     }
 }

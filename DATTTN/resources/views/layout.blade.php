@@ -122,7 +122,7 @@
                             <li class="current-menu-item active"><a title="Trang Chủ" href="{{route('homepage')}}">Trang Chủ</a>
                             </li>
                              <li class="mega dropdown">
-                                <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle"
+                                <a title="Thể Loại" href="{{route('genre')}}" data-toggle="dropdown" class="dropdown-toggle"
                                     aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     @foreach ($genre as $key =>$gen)
@@ -135,7 +135,7 @@
                                     aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     @foreach ($country as $key =>$count)
-                                    <li><a title="V{{$count->title}}" href="{{route('country', $count->slug)}}">{{$count->title}}</a></li>
+                                    <li><a title="{{$count->title}}" href="{{route('country', $count->slug)}}">{{$count->title}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>

@@ -13,7 +13,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -64,7 +64,7 @@ class GenreController extends Controller
      */
     public function edit($id)
     {
-        $genre = Genre::find($id);
+        $genre = Genre::findOrFail($id);
         $list = Genre::all();
         return view('admincp.genre.form', compact('list','genre'));
     }
@@ -79,7 +79,7 @@ class GenreController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $genre = Genre::find($id);
+        $genre = Genre::findOrFail($id);
         $genre->title = $data['title'];
         $genre->description = $data['description'];
         $genre->slug = $data['slug'];
@@ -96,7 +96,7 @@ class GenreController extends Controller
      */
     public function destroy($id)
     {
-        Genre::find($id)->delete();
+        Genre::findOrFail($id)->delete();
         return redirect()->back();
     }
 }

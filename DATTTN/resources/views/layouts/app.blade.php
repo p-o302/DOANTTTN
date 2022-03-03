@@ -19,6 +19,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -40,12 +41,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit" style="width: 130px !important;">Tìm kiếm</button>
+                        </form>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -83,12 +88,12 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="display: flex">
             @if (Auth::id())
             {{-- kiểm tra nếu đăng nhập thì mới vào được trang admin có thanh nav  --}}
-                <div class="container">
-                    @include('layouts.navbar')
-                </div>
+              
+              @include('layouts.navbar')
+            
             @endif
                 @yield('content')
         </main>

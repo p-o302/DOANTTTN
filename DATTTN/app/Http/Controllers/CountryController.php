@@ -13,7 +13,9 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $list = Country::latest()->paginate(5);
+        return view('admincp.country.listCountry',compact('list'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -23,8 +25,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        $list = Country::all();
-        return view('admincp.country.form', compact('list'));
+        // $list = Country::all();
+        return view('admincp.country.form');
     }
 
     /**
@@ -42,7 +44,7 @@ class CountryController extends Controller
         $country->slug = $data['slug'];
         $country->status = $data['status'];
         $country->save();
-        return redirect()->back();
+        return redirect(route('country.index'))->with('flash_message','Country add successfully');
     }
 
     /**
@@ -64,7 +66,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::find($id);
+        $country = Country::findOrFail($id);
         $list = Country::all();
         return view('admincp.country.form', compact('list','country'));
     }
@@ -85,7 +87,8 @@ class CountryController extends Controller
         $country->slug = $data['slug'];
         $country->status = $data['status'];
         $country->save();
-        return redirect(route('country.create'));
+        // return redirect(route('country.create'));
+        return redirect(route('country.index'))->with('flash_message','Country add successfully');
     }
 
     /**
@@ -96,7 +99,8 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        Country::find($id)->delete();
-        return redirect()->back();
+        Country::findOrFail($id)->delete();
+        // return redirect()->back();
+        return redirect(route('country.index'))->with('flash_message','Country add successfully');
     }
 }

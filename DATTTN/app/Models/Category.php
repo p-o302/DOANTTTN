@@ -10,5 +10,5 @@ class Category extends Model
     public $timestamps = false;
     use HasFactory;
 
-    public $fillable = ['title', 'description', 'status'];
+    public $fillable = ['title', 'description','slug', 'status'];
 }
