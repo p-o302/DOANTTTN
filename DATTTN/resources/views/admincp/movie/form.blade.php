@@ -15,7 +15,7 @@
                         @endif
                         @if (!isset($movie))
                             {!! Form::open(['route' => 'movie.store', 'method' => 'POST','enctype'=> 'multipart/form-data']) !!}
-                        @else  
+                        @else
                             {!! Form::open(['route' => ['movie.update', $movie->id], 'method' => 'PUT','enctype'=> 'multipart/form-data']) !!}
                         @endif
                         {{-- {!! Form::open(['route' => 'movie.store', 'method' => 'POST']) !!} --}}
@@ -34,7 +34,7 @@
                             {!! Form::textarea('description', isset($movie) ? $movie->description : '', ['style' => 'resize:none', 'class' => 'form-control', 'placeholder' => 'Nhập...', 'id' => 'description']) !!}
                         </div>
                         <div class="form-group">
-                            
+
                             {!! Form::label('active', 'Active', []) !!}
                             {!! Form::select('status', ['1' => 'Hiển thị', '0' => 'Ẩn'],isset($movie) ? $movie->status : null, ['class' => 'form-control']) !!}
                         </div>
@@ -49,62 +49,23 @@
                         <div class="form-group">
                             {!! Form::label('Genre', 'Genre', []) !!}
                             {!! Form::select('genre_id',$genre, isset($movie) ? $movie->genre : '', ['class' => 'form-control']) !!}
-                        </div>  
+                        </div>
                         <div class="form-group">
                             {!! Form::label('Image', 'Image', []) !!} <br>
                             {!! Form::file('image', ['class'=>'form-control-file']) !!}
-                        </div> 
+                        </div>
 
                         @if (empty($movie))
                             {!! Form::submit('Them du lieu', ['class' => 'btn btn-success']) !!}
                         @else
                             {!! Form::submit('Cap nhat', ['class' => 'btn btn-success']) !!}
 
-                        @endif    
+                        @endif
 
                         {!! Form::close() !!}
                     </div>
 
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Slug</th>
-                            <th scope="col">Active/Inactive</th>
-                            <th scope="col">Manage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($list as $key => $cate)
-                            <tr>
-                                <th scope="row">{{ $key }}</th>
-                                <td>{{ $cate->title }}</td>
-                                <td> <img src="{{asset('uploads/movie/'.$cate->image)}}" alt="mangcui" srcset="" style="width: 50px; height: 70px;"></td>
-                                <td style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 0;">{{ $cate->description }}</td>
-                                <td>{{ $cate->slug }}</td>
-                                <td>
-                                    @if ($cate->status)
-                                        Hiển thị
-                                    @else
-                                        Không hiển thị
-                                    @endif
-                                </td>
-                                <td>
-                                    {!! Form::open(['method' => 'DELETE','route' => ['movie.destroy', $cate->id], 'onsubmit'=>'return confirm("Are you sure?")']) !!}
-                                      {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
-                                      <a href="{{route('movie.edit', $cate->id)}}" class="btn btn-primary">Sửa</a>
-                                    {!! Form::close() !!}
-                                </td>
-                            </tr>
-                        @endforeach
-
-
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

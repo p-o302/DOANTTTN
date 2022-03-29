@@ -41,7 +41,7 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
     {
         Category::create($request->all());
-        return redirect(route('category.index'))->with('flash_message','Producer add successfully');
+        return redirect(route('category.index'))->with('flash_message','Category add successfully');
         // return redirect()->back();
     }
 

@@ -13,7 +13,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        
+        $list = Genre::latest()->paginate(5);
+        return view('admincp.genre.listGenre',compact('list'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -23,8 +25,8 @@ class GenreController extends Controller
      */
     public function create()
     {
-        $list = Genre::all();
-        return view('admincp.genre.form', compact('list'));
+        // $list = Genre::all();
+        return view('admincp.genre.form');
     }
 
     /**
@@ -42,7 +44,7 @@ class GenreController extends Controller
         $genre->slug = $data['slug'];
         $genre->status = $data['status'];
         $genre->save();
-        return redirect()->back();
+        return redirect(route('genre.index'))->with('flash_message','Genre add successfully');
     }
 
     /**
@@ -85,7 +87,7 @@ class GenreController extends Controller
         $genre->slug = $data['slug'];
         $genre->status = $data['status'];
         $genre->save();
-        return redirect(route('genre.create'));
+        return redirect(route('genre.index'))->with('flash_message','Genre has been edited successfully');
     }
 
     /**
@@ -97,6 +99,6 @@ class GenreController extends Controller
     public function destroy($id)
     {
         Genre::findOrFail($id)->delete();
-        return redirect()->back();
+        return redirect(route('genre.index'))->with('flash_message','Genre has been deleted successfully');
     }
 }

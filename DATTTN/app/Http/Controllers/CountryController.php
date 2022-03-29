@@ -81,7 +81,7 @@ class CountryController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $country = Country::find($id);
+        $country = Country::findOrFail($id);
         $country->title = $data['title'];
         $country->description = $data['description'];
         $country->slug = $data['slug'];

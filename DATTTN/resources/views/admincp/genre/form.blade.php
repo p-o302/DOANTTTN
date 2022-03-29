@@ -15,7 +15,7 @@
                         @endif
                         @if (!isset($genre))
                             {!! Form::open(['route' => 'genre.store', 'method' => 'POST']) !!}
-                        @else  
+                        @else
                             {!! Form::open(['route' => ['genre.update', $genre->id], 'method' => 'PUT']) !!}
                         @endif
                         {{-- {!! Form::open(['route' => 'genre.store', 'method' => 'POST']) !!} --}}
@@ -34,7 +34,7 @@
                             {!! Form::textarea('description', isset($genre) ? $genre->description : '', ['style' => 'resize:none', 'class' => 'form-control', 'placeholder' => 'Nhập...', 'id' => 'description']) !!}
                         </div>
                         <div class="form-group">
-                            
+
                             {!! Form::label('active', 'Active', []) !!}
                             {!! Form::select('status', ['1' => 'Hiển thị', '0' => 'Ẩn'],isset($genre) ? $genre->status : null, ['class' => 'form-control']) !!}
                         </div>
@@ -44,49 +44,13 @@
                         @else
                             {!! Form::submit('Cap nhat', ['class' => 'btn btn-success']) !!}
 
-                        @endif    
+                        @endif
 
                         {!! Form::close() !!}
                     </div>
 
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Slug</th>
-                            <th scope="col">Active/Inactive</th>
-                            <th scope="col">Manage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($list as $key => $cate)
-                            <tr>
-                                <th scope="row">{{ $key }}</th>
-                                <td>{{ $cate->title }}</td>
-                                <td>{{ $cate->description }}</td>
-                                <td>{{ $cate->slug }}</td>
-                                <td>
-                                    @if ($cate->status)
-                                        Hiển thị
-                                    @else
-                                        Không hiển thị
-                                    @endif
-                                </td>
-                                <td>
-                                    {!! Form::open(['method' => 'DELETE','route' => ['genre.destroy', $cate->id], 'onsubmit'=>'return confirm("Are you sure?")']) !!}
-                                      {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
-                                      <a href="{{route('genre.edit', $cate->id)}}" class="btn btn-primary">Sửa</a>
-                                    {!! Form::close() !!}
-                                </td>
-                            </tr>
-                        @endforeach
 
-
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
