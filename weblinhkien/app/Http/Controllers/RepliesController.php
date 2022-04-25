@@ -44,10 +44,10 @@ class RepliesController extends Controller
                 'user_id' => Auth::user()->id
             ]);
 
-            return redirect()->route('detail.show',$request->input('productID'))->with('success','Reply added');
+            return redirect()->route('detail.show', $request->input('productID'))->with('success', 'Reply added');
         }
 
-        return back()->withInput()->with('error','Something wronmg');
+        return back()->withInput()->with('error', 'Something wronmg');
     }
 
     /**
@@ -93,14 +93,13 @@ class RepliesController extends Controller
     public function destroy(Reply $reply)
     {
         if (Auth::check()) {
-            $reply = Reply::where(['id'=>$reply->id,'user_id'=>Auth::user()->id]);
+            $reply = Reply::where(['id' => $reply->id, 'user_id' => Auth::user()->id]);
             if ($reply->delete()) {
                 return 1;
-            }else{
+            } else {
                 return 2;
             }
-        }else{
-
+        } else {
         }
         return 3;
     }

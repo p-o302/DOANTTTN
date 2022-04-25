@@ -13,8 +13,7 @@
                     @foreach ($products as $product)
                     <option value="{{ $product->productID }}" {{ ($product->productID==$prodetail->productID)?'selected':''}}>
                     {{ $product->productName }}
-                    </option>
-                        
+                    </option>           
                     @endforeach
                 </select>
             </div>
@@ -45,10 +44,7 @@
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-info btn-sm" value="Lưu thay đổi">
-
             </div>
-
-            
             </form>
         </div>
     </div>
@@ -62,7 +58,6 @@
        maxHeight: null,
        focus: false
    });
-   
    });
      </script>
 @endsection

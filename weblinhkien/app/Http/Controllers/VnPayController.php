@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Session;
 use App\Bill;
 use App\BillDetail;
 use App\Customer;
-
 class VnPayController extends Controller
 {
     public function create(Request $request, $price)
-    {       
+    {
         $vnp_TmnCode = "867ETWWS"; //Mã website tại VNPAY 
         $vnp_HashSecret = "WIAJFTZTGBTULEORGCGESBOKVTSNZIKW"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -57,7 +56,7 @@ class VnPayController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-           // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
+            // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
             $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
             $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
         }
@@ -65,39 +64,36 @@ class VnPayController extends Controller
     }
 
     public function return(Request $request)
-{
+    {
+        if ($request->vnp_ResponseCode == "00") {
 
-    if($request->vnp_ResponseCode == "00") {
-      
-        
-         $oldbill = Bill::all()->last();
-              $bill = Bill::all()->last();
-              $bill->bill_id = $oldbill->bill_id;
-              $bill->customerID = $oldbill->customerID;
-              $bill->date_order = $oldbill->date_order;
-              $bill->total = $oldbill->total;
-              $bill->note = $oldbill->note;
-              $bill->payment = 'Trực tuyến';
-              $bill->codevnpay = $request->vnp_TransactionNo;
-              $bill->save();
+            $oldbill = Bill::all()->last();
+            $bill = Bill::all()->last();
+            $bill->bill_id = $oldbill->bill_id;
+            $bill->customerID = $oldbill->customerID;
+            $bill->date_order = $oldbill->date_order;
+            $bill->total = $oldbill->total;
+            $bill->note = $oldbill->note;
+            $bill->payment = 'Trực tuyến';
+            $bill->codevnpay = $request->vnp_TransactionNo;
+            $bill->save();
 
+            Session::flash('message', "Đã thanh toán dịch vụ !");
+            return redirect()->route('home');
+        }
 
-              Session::flash('message', "Đã thanh toán dịch vụ !");
-              return redirect()->route('home');
-    }
-    
-    Bill::all()->last()->delete();
-    BillDetail::all()->last()->delete();
-    Customer::all()->last()->delete();
-    Session::flash('message', "Lỗi trong quá trình thanh toán phí dịch vụ");
-       
-    return redirect()->route('home');
-    /*
+        Bill::all()->last()->delete();
+        BillDetail::all()->last()->delete();
+        Customer::all()->last()->delete();
+        Session::flash('message', "Lỗi trong quá trình thanh toán phí dịch vụ");
+
+        return redirect()->route('home');
+        /*
     	NCB
         9704198526191432198
         NGUYEN VAN A
         07/15
         OTP 123456
     */
-}
+    }
 }

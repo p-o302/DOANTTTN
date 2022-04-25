@@ -9,7 +9,6 @@ use App\Bill;
 use App\BillDetail;
 use App\Customer;
 use Illuminate\Support\Facades\Session;
-
 class UserController extends Controller
 {
     /**
@@ -29,7 +28,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -40,7 +38,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      
     }
 
     /**
@@ -53,34 +50,30 @@ class UserController extends Controller
     {
         if (DB::table('customers') != null) {
             $customer = DB::table('customers')
-            ->join('bills', 'customers.id', '=', 'bills.customerID')
-            ->select('customers.*', 'bills.total as bill_total', 'bills.note as bill_note', 'bills.status as bill_status', 'bills.payment as bill_payment')
-            ->where('customers.userID', '=', $id)
-            ->first();
-        }else{
+                ->join('bills', 'customers.id', '=', 'bills.customerID')
+                ->select('customers.*', 'bills.total as bill_total', 'bills.note as bill_note', 'bills.status as bill_status', 'bills.payment as bill_payment')
+                ->where('customers.userID', '=', $id)
+                ->first();
+        } else {
             $customer = '';
         }
-      
 
-       if (DB::table('bills') != null) {
-           if ($customer != null) {
-            $bills = DB::table('bills')
-            ->join('bill_details', 'bills.bill_id', '=', 'bill_details.bill_id')
-            ->leftjoin('products', 'bill_details.productID', '=', 'products.productID')
-            ->where('bills.customerID', '=', $customer->id)
-            ->select('bills.*', 'bill_details.*', 'products.productName as product_name')
-            ->get();
-           }else{
-               $bills = '';
-           }
-       
-       }else{
-           $bills = '';
-       }
+        if (DB::table('bills') != null) {
+            if ($customer != null) {
+                $bills = DB::table('bills')
+                    ->join('bill_details', 'bills.bill_id', '=', 'bill_details.bill_id')
+                    ->leftjoin('products', 'bill_details.productID', '=', 'products.productID')
+                    ->where('bills.customerID', '=', $customer->id)
+                    ->select('bills.*', 'bill_details.*', 'products.productName as product_name')
+                    ->get();
+            } else {
+                $bills = '';
+            }
+        } else {
+            $bills = '';
+        }
 
-        return view('orderdetail',['customer'=>$customer,'bills'=>$bills]);
-      
-
+        return view('orderdetail', ['customer' => $customer, 'bills' => $bills]);
     }
 
     /**
@@ -91,7 +84,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        
     }
 
     /**

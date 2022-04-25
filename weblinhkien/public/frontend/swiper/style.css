@@ -12,7 +12,6 @@ body {
     font-family: Poppins, sans-serif;
     font-size: 16px;
 }
-
 .header-background {
     background: linear-gradient(to right, #DC143C, #8E44AD, rgb(255, 0, 212));
 }
@@ -40,7 +39,7 @@ h5 {
     position: absolute;
     z-index: 1;
     background: rgb(255, 255, 255);
-    border: solid 1px rgb(218, 66, 248);
+    border: solid 1px rgb(57, 57, 57) !important;
 }
 
 .dropdown:hover .dropdown-content {
@@ -49,7 +48,7 @@ h5 {
 }
 
 .hr {
-    border-bottom: solid 1px #a80bad;
+    border-bottom: solid 1px #000 !important;
     background: rgb(255, 255, 255);
     font-weight: bold;
 }
@@ -124,8 +123,8 @@ h5 {
 }
 
 .vien {
-    border-top: 4px solid #e83e8c;
-    border-bottom: 4px solid #e83e8c;
+    border-top: 4px solid #3d3d3d;
+    border-bottom: 4px solid #3d3d3d;
 }
 
 .card:hover {

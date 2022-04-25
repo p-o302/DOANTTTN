@@ -19,9 +19,8 @@ class BuildController extends Controller
     {
         $categories = Category::all();
         $products = Product::all();
-        return view('build',['categories'=>$categories,'products'=>$products]);
+        return view('build', ['categories' => $categories, 'products' => $products]);
     }
-
     /**
      * Show the form for creating a new resource.
      * @param  int  $id
@@ -30,17 +29,16 @@ class BuildController extends Controller
     public function choose(Request $request, $productID)
     {
         $categoryID = Product::where('productID', $productID)->select('categoryID')->first();
-        $category = DB::table('categories')->where('categoryID',$categoryID->categoryID)->first();
+        $category = DB::table('categories')->where('categoryID', $categoryID->categoryID)->first();
         $product = DB::table('products')->where('productID', $productID)->first();
-        if($product != null){
+        if ($product != null) {
             // nếu Session('Cart') khác null thì gán cho biến $oldcart ngược lại thì gán null 
-                $oldcart =  Session('Build') ? Session('Build') : null;
-                $newcart = new Cart($oldcart);
-                $newcart->AddCart($product, $product->productID);
-                $request->session()->put('Build', $newcart);
+            $oldcart =  Session('Build') ? Session('Build') : null;
+            $newcart = new Cart($oldcart);
+            $newcart->AddCart($product, $product->productID);
+            $request->session()->put('Build', $newcart);
         }
-       
-        return view('buildpc',['category'=>$category, 'product'=>$product]);
+        return view('buildpc', ['category' => $category, 'product' => $product]);
     }
 
     /**
@@ -61,9 +59,9 @@ class BuildController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         $products = Product::where('categoryID', $id)->get();
-        return view('buildviewajax',['products'=>$products]);
+        return view('buildviewajax', ['products' => $products]);
     }
 
     /**

@@ -40,7 +40,7 @@
                 position: absolute;
                 z-index: 1;
                 background: rgb(255, 255, 255);
-                border: solid 1px rgb(218, 66, 248);
+                border: solid 1px rgb(0, 0, 0) !important;
             }
             
             .dropdown:hover .dropdown-content {
@@ -49,9 +49,10 @@
             }
             
             .hr {
-                border-bottom: solid 1px #a80bad;
+                border-bottom: solid 1px #7e7a7a !important;
                 background: rgb(255, 255, 255);
                 font-weight: bold;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
             }
             
             .list-product-title {
@@ -124,8 +125,8 @@
             }
             
             .vien {
-                border-top: 4px solid #e83e8c;
-                border-bottom: 4px solid #e83e8c;
+                border-top: 4px solid #3d3d3d;
+                border-bottom: 4px solid #3d3d3d;
             }
             
             .card:hover {
