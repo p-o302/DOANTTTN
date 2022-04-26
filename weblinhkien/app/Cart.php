@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-
-class Cart{
+use Illuminate\Database\Eloquent\Model;
+class Cart extends Model{
   public $products = null;
   public $totalPrice = 0;
   public $totalQuanty = 0;
@@ -17,10 +17,8 @@ class Cart{
     }
   }
 
-  
   public function AddCart($product, $productID)
   {
-
     $newProduct = ['quanty' => 0, 'price'=>$product->listPrice, 'productInfo' => $product];
     if($this->products){
         if(array_key_exists($productID, $this->products)){
@@ -33,12 +31,14 @@ class Cart{
     $this->totalPrice += $product->listPrice;
     $this->totalQuanty++;
   }
+
   public function DeleteItemCart($productID)
   {
     $this->totalQuanty -= $this->products[$productID]['quanty'];
     $this->totalPrice -= $this->products[$productID]['price'];
     unset($this->products[$productID]);
   }
+
   public function UpdateItemCart($productID, $quanty)
   {
     $this->totalQuanty -= $this->products[$productID]['quanty'];

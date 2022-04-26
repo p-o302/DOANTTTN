@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ShoppingMail;
+use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 
 class CheckoutController extends Controller
 {
@@ -21,7 +22,9 @@ class CheckoutController extends Controller
     public function postCheckOut(Request $request)
     {
         if ($request->thanhtoan == "tienmat") {
+            // dd(Session('Cart'));
             $cartInfor = Session('Cart') ? Session('Cart') : null;
+            // dd($cartInfor->totalPrice);
             // save
             $customer = new Customer();
             $customer->userID = $request->id;
@@ -31,16 +34,24 @@ class CheckoutController extends Controller
             $customer->phone_number = $request->phonenumber;
             $customer->note = $request->note;
             $customer->save();
+
             $bill = new Bill;
             $bill->customerID = $customer->id;
+            // dd($customer->id);
             $bill->date_order = date('Y-m-d H:i:s');
-            $bill->total = str_replace(',', '', $cartInfor->totalPrice);
+            // $bill->total = str_replace(',', '', $cartInfor->totalPrice);
+            // dd($cartInfor);
+            $bill->total=  $cartInfor->totalPrice;
+            // ;
+            // dd($cartInfor);
+            // // dd(gettype($cartInfor->totalPrice));
+            //             // dd($cartInfor->totalPrice);
             $bill->note = $request->note;
             $bill->payment = 'Tiền mặt';
             $bill->codevnpay = '';
             $bill->save();
 
-            if (count($cartInfor->products) > 0) {
+            if (count($cartInfor->products) > 0) { 
                 foreach ($cartInfor->products as $item) {
                     $billDetail = new BillDetail;
                     $billDetail->bill_id = $bill->bill_id;
@@ -58,8 +69,8 @@ class CheckoutController extends Controller
             $date = $bill->date_order;
             $name = $customer->name;
             $phonenumber = $customer->phone_number;
-            Mail::to($customer->email)->send(new ShoppingMail($bills, $billdetails, $date, $name, $phonenumber));
-            Session::flash('message', "Đơn hàng của bạn đang chờ được xử lí !");
+            // Mail::to($customer->email)->send(new ShoppingMail($bills, $billdetails, $date, $name, $phonenumber));
+            // Session::flash('message', "Đơn hàng của bạn đang chờ được xử lí !");
 
             return redirect()->route('info.show', $request->id);
         } else {
@@ -79,6 +90,7 @@ class CheckoutController extends Controller
             $bill->customerID = $customer->id;
             $bill->date_order = date('Y-m-d H:i:s');
             $bill->total = str_replace(',', '', $cartInfor->totalPrice);
+            // dd('total');
             $bill->note = $request->note;
             $bill->save();
 
@@ -105,7 +117,7 @@ class CheckoutController extends Controller
             $vnp_TmnCode = "X7ACVZ80"; //Mã website tại VNPAY
             $vnp_HashSecret = "VQFZYQPSKLJKYBSYTUSXRULCQRZWPNWJ"; //Chuỗi bí mật
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "https://localhost:80/weblinhkien/Return-Result";
+            $vnp_Returnurl = "http://127.0.0.1:8000/Return-Result";
             $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
             $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
             $vnp_OrderType = 'billpayment';

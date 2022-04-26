@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id' => '585510065871952', //client face của bạn
+        'client_secret' => '4cfffbc79401c029cbeaf9e4b638a4ab', //client app service face của bạn
+        'redirect' => 'http://127.0.0.1:8000/login/callback' //callback trả về
+    ],
+
 ];

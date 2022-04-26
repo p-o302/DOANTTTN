@@ -64,7 +64,7 @@
                                 <div class="card-body">
                                     <h6 class="card-title product-title mb-3">
                                         <a data-toggle="tooltip" data-placement="bottom" title="
-                            {{ $product->productName }}">
+                                {{ $product->productName }}">
                                             {{ $product->productName }}
                                         </a>
                                     </h6>
@@ -107,16 +107,16 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-sm-4">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK9FG20Cw3tFuoAWdxmrjosHuGq3fx6oKc9C0uIC4_9pUKLMQfMEOpYvbcHR7Ec_bArZI&usqp=CAU" alt="ads" class="rounded"
-                    width="390" height="190">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK9FG20Cw3tFuoAWdxmrjosHuGq3fx6oKc9C0uIC4_9pUKLMQfMEOpYvbcHR7Ec_bArZI&usqp=CAU"
+                    alt="ads" class="rounded" width="390" height="190">
             </div>
             <div class="col-sm-4">
-                <img src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/141543/Originals/TT-Laptop-PC-THUMB.jpg" alt="ads" class="rounded"
-                    width="390" height="190">
+                <img src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/141543/Originals/TT-Laptop-PC-THUMB.jpg"
+                    alt="ads" class="rounded" width="390" height="190">
             </div>
             <div class="col-sm-4">
-                <img src="https://canhcoupon.com/images/khuyen-mai/2017/08/laptop-gia-tot-dien-thoai-gia-tot-fptshop-com-vn-banner.jpg" alt="ads" class="rounded"
-                    width="390" height="190">
+                <img src="https://canhcoupon.com/images/khuyen-mai/2017/08/laptop-gia-tot-dien-thoai-gia-tot-fptshop-com-vn-banner.jpg"
+                    alt="ads" class="rounded" width="390" height="190">
             </div>
         </div>
     </div>
@@ -138,7 +138,7 @@
                                     <div class="card-body">
                                         <h6 class="card-title product-title mb-3">
                                             <a data-toggle="tooltip" data-placement="bottom" title="
-                            {{ $item->productName }}">
+                                {{ $item->productName }}">
                                                 {{ $item->productName }}
                                             </a>
                                         </h6>
@@ -165,7 +165,8 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <a href="{{route('proshow.show',7)}}" type="button" class="btn btn-outline-danger  " style="margin: auto; width: 30%;">Xem
+                <a href="{{ route('proshow.show', 7) }}" type="button" class="btn btn-outline-danger  "
+                    style="margin: auto; width: 30%;">Xem
                     tất cả</a>
             </div>
         </div>
@@ -188,7 +189,7 @@
                                     <div class="card-body">
                                         <h6 class="card-title product-title mb-3">
                                             <a data-toggle="tooltip" data-placement="bottom" title="
-                            {{ $item->productName }}">
+                                {{ $item->productName }}">
                                                 {{ $item->productName }}
                                             </a>
                                         </h6>
@@ -216,7 +217,8 @@
             </div>
             <div class="row mt-5">
 
-                <a href="{{route('proshow.show',9)}}" type="button" class="btn btn-outline-danger  " style="margin: auto; width: 30%;">Xem
+                <a href="{{ route('proshow.show', 9) }}" type="button" class="btn btn-outline-danger  "
+                    style="margin: auto; width: 30%;">Xem
                     tất cả</a>
             </div>
         </div>

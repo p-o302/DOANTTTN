@@ -35,23 +35,29 @@ Auth::routes();
 
 //định tuyến cho cartcontroller
 Route::get('Add-Cart/{id}', 'CartController@AddCart');
+
 // xóa tại cart ajax
 Route::get('Delete-Item-Cart/{id}', 'CartController@DeleteItemCart');
+
 // điều hướng đến trang list cart
 Route::get('List-Carts', 'CartController@ViewListCart')->name('list.cart');
+
 // xóa product tại list cart
 Route::get('Delete-List-Item-Cart/{id}', 'CartController@DeleteListItemCart');
+
 // lưu thay đôi số lượng tại quanty của list cart
 Route::post('All-Save', 'CartController@SaveAllItem');
-
 Route::get('checkout', 'CheckoutController@getCheckOut');
 Route::post('Check-Out', 'CheckoutController@postCheckOut');
+
 // thanh toán trực tuyến vnpay
 Route::get('Return-Result', 'VnPayController@return');
+
 // điều hướng đến trang thông tin tài khoản
 Route::resources([
   'info' => 'UserController',
 ]);
+
 // điều hướng đến list sản phẩm và chi tiết sản phẩm tại public
 Route::get('show/{show}', 'ProductsController@showlist')->name('proshow.show');
 Route::get('showdetail/{show}', 'ProductsController@showdetail')->name('detail.show');
@@ -60,23 +66,23 @@ Route::get('Add-Item-Cart/{id}', 'ProductsController@AddItemCart')->name('add.it
 // xây dựng cấu hình
 Route::get('buildpc', 'BuildController@index')->name('build.index');
 Route::get('choose-product/{id}', 'BuildController@choose')->name('build.choose');
+
 // xem ds product ajax
 Route::get('View-Pro/{id}', 'BuildController@show');
+
 //điều hướng đến controller xử lí comment
 Route::resource('/comments', 'CommentsController');
 Route::resource('/replies', 'RepliesController');
 Route::post('/replies/ajaxDelete', 'RepliesController@ajaxDelete');
+
 //định tuyến đến trang home người dùng
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('find', 'HomeController@find')->name('home.find');
+
 // định tuyến đến trang giới thiệu
 Route::get('gioithieu', function () {
   return view('introduce');
 })->name('gioithieu');
-
-
-
-
 
 Route::get('laythongtin', function () {
   if (Auth::check()) {
@@ -95,7 +101,9 @@ Route::get('orderdetail', function () {
   return view('orderdetail');
 })->name('orderdetail')->middleware('UserRole');
 
-
+//Login facebook
+Route::get('/login-facebook','AdminController@login_facebook');
+Route::get('/login/callback','AdminController@callback_facebook');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -101,8 +101,6 @@ class CartController extends Controller
         return view('listcart');
     }
 
-
-
     /**
      * Display the specified resource.
      *
